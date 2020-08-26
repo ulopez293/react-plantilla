@@ -1,2 +1,1 @@
-# Plantilla de React
-Primera Version
+# Plantilla React
