@@ -1,39 +1,24 @@
 import React, { useState } from 'react'
 import { render } from 'react-dom'
-import { HashRouter as Router, BrowserRouter as RouterTwo, Route, Switch, Link } from 'react-router-dom'
-import Posts from './componentes/Posts.js'
+import { HashRouter as Router, BrowserRouter as RouterTwo, Route, Switch, Redirect } from 'react-router-dom'
+import Posts from './componentes/Posts'
+import Post from './componentes/Post'
+import Navegador from './componentes/Navegador'
+import Home from './componentes/Home'
 
 function App() {
 
-  const [estado, setEstado] = useState({
-    plantilla: "Plantilla de Inicio React",
-    saludo: "Hola Mundo React",
-    estilos: { textAlign: "center" }
-  })
-
   return(
-      <div>
-        <Router>
-          <nav>
-            <div className="nav-wrapper">
-              <Link to="/" className="brand-logo">Logo</Link>
-              <ul id="nav-mobile" className="right hide-on-med-and-down">
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/posts">Posts</Link></li>
-              </ul>
-            </div>
-          </nav>
-          <div style={estado.estilos}>
-            <h5>{estado.plantilla}</h5>
-            <h6>{estado.saludo}</h6>
-          </div>
-          <br/>
-          <Switch>
-            <Route exact path='/' component={Posts} />
-            <Route exact path='/posts' component={Posts} />
-          </Switch>
-        </Router>
-      </div>
+    <Router>
+      <Navegador />
+      <Switch>
+        <Route exact path='/' component={Home} />
+        <Route exact path='/Home' component={Home} />
+        <Route exact path='/posts' component={Posts} />
+        <Route exact path='/posts/:id' component={Post} />
+        <Redirect exact from="/*" to="/" />
+      </Switch>
+    </Router>
   )
 }
 
