@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
+import { HashRouter as Router, BrowserRouter as RouterTwo, Route, Switch, Link } from 'react-router-dom'
 import Posts from './componentes/Posts.js'
 
 class App extends React.Component {
