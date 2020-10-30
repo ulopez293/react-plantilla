@@ -1,5 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
+import Posts from './componentes/Posts.js'
 
 class App extends React.Component {
 
@@ -7,15 +9,34 @@ class App extends React.Component {
     super(props)
     this.state = {
       plantilla: "Plantilla de Inicio React",
-      saludo: "Hola Mundo React"
+      saludo: "Hola Mundo React",
+      estilos: { textAlign: "center" }
     }
   }
 
   render() {
     return(
       <div>
-        <h1>{this.state.plantilla}</h1>
-        <p>{this.state.saludo}</p>
+        <Router>
+          <nav>
+            <div className="nav-wrapper">
+              <Link to="/" className="brand-logo">Logo</Link>
+              <ul id="nav-mobile" className="right hide-on-med-and-down">
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/posts">Posts</Link></li>
+              </ul>
+            </div>
+          </nav>
+          <div style={this.state.estilos}>
+            <h5>{this.state.plantilla}</h5>
+            <h6>{this.state.saludo}</h6>
+          </div>
+          <br/>
+          <Switch>
+            <Route exact path='/' component={Posts} />
+            <Route exact path='/posts' component={Posts} />
+          </Switch>
+        </Router>
       </div>
     )
   }
