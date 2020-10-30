@@ -1,38 +1,37 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { render } from 'react-dom'
 import update from 'react-addons-update'
 import InvocarAPI from '../utilidades/InvocarAPI.js'
 import Post from './Post'
+import regeneratorRuntime from "regenerator-runtime";
 
-class Posts extends React.Component {
+function Posts () {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      posts: []
-    }
-  }
+  const [posts, setPosts] = useState([])
 
-  componentDidMount(){
-    InvocarAPI.invocarGET('/posts', response => {
-      let stateUpdate = update(this.state, {
-        posts: {$set: response}
+  useEffect(() => {
+    const cargarPosts = async () => {
+      InvocarAPI.invocarGET('/posts', response => {
+        setPosts(response)
+      }, error => {
+        console.log("Error al cargar los posts: ", error)
       })
-      this.setState(stateUpdate)
-    }, error => {
-      console.log("Error al cargar los posts: ", error)
-    })
-  }
+    }
+    cargarPosts()
+    return () => {
+      console.log("saneamiento")
+    }
+  }, [posts.length])
 
-  render() {
-    return(
+  return (
       <div>
-        <For each="post" of={this.state.posts}>
-          <Post key={post.id} post={post} />
-        </For>
+        <If condition={posts}>
+          <For each="post" of={posts}>
+            <Post key={post.id} post={post} />
+          </For>
+        </If>
       </div>
-    )
-  }
+  )
 }
 
 export default Posts

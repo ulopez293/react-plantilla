@@ -1,21 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { render } from 'react-dom'
 import { HashRouter as Router, BrowserRouter as RouterTwo, Route, Switch, Link } from 'react-router-dom'
 import Posts from './componentes/Posts.js'
 
-class App extends React.Component {
+function App() {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      plantilla: "Plantilla de Inicio React",
-      saludo: "Hola Mundo React",
-      estilos: { textAlign: "center" }
-    }
-  }
+  const [estado, setEstado] = useState({
+    plantilla: "Plantilla de Inicio React",
+    saludo: "Hola Mundo React",
+    estilos: { textAlign: "center" }
+  })
 
-  render() {
-    return(
+  return(
       <div>
         <Router>
           <nav>
@@ -27,9 +23,9 @@ class App extends React.Component {
               </ul>
             </div>
           </nav>
-          <div style={this.state.estilos}>
-            <h5>{this.state.plantilla}</h5>
-            <h6>{this.state.saludo}</h6>
+          <div style={estado.estilos}>
+            <h5>{estado.plantilla}</h5>
+            <h6>{estado.saludo}</h6>
           </div>
           <br/>
           <Switch>
@@ -38,8 +34,7 @@ class App extends React.Component {
           </Switch>
         </Router>
       </div>
-    )
-  }
+  )
 }
 
 render(<App />, document.getElementById('root'))

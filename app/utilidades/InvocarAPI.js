@@ -35,7 +35,11 @@ class InvocarAPI {
   invocar(ruta_api, parametros, ok, fail) {
     fetch(server.host + ruta_api, parametros)
     .then(response => {
-      if(response.ok) return response.json()
+      if(response.ok) {
+        return response.json()
+      } else {
+        fail(JSON.stringify(response))
+      }
     })
     .then(datos => ok(datos))
     .catch(error => fail(error))
