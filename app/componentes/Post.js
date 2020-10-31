@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { render } from 'react-dom'
 import PropTypes from 'prop-types'
-import InvocarAPI from '../utilidades/InvocarAPI.js'
+import InvocarAPI from '../utilidades/InvocarAPI'
 import useGetDato from './Hooks/useGetDato'
+import { connect } from 'react-redux'
+import { actionE } from '../redux/Actions'
 
 function Post (props) {
   const [post, setPost] = useGetDato('/posts', props)
@@ -16,6 +18,7 @@ function Post (props) {
 
   return(
     <div>
+      <h6>redux: {props.title}, {props.body}</h6>
       <If condition={post}>
         <div className="row">
           <div className="input-field col s12">
@@ -39,4 +42,11 @@ function Post (props) {
 //   post: PropTypes.object.isRequired
 // }
 
-export default Post
+const mapStateToProps = (state) => {
+  return {
+    title: state.reducer.title,
+    body: state.reducer.body
+  }
+}
+
+export default connect(mapStateToProps, { actionE })(Post)

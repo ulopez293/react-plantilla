@@ -1,14 +1,25 @@
 import React, { useState } from 'react'
 import { render } from 'react-dom'
 import { HashRouter as Router, BrowserRouter as RouterTwo, Route, Switch, Redirect } from 'react-router-dom'
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import reducers from './redux/reducers'
 import Posts from './componentes/Posts'
 import Post from './componentes/Post'
 import Navegador from './componentes/Navegador'
 import Home from './componentes/Home'
 
+const middleware = thunk
+const store = createStore(
+  reducers,
+  applyMiddleware(middleware)
+)
+
 function App() {
 
   return(
+  <Provider store={store}>
     <Router>
       <Navegador />
       <Switch>
@@ -19,6 +30,7 @@ function App() {
         <Redirect exact from="/*" to="/" />
       </Switch>
     </Router>
+  </Provider>
   )
 }
 
