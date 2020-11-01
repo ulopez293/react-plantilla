@@ -1,11 +1,12 @@
 import InvocarAPI from '../utilidades/InvocarAPI'
 
-export const actionE = () => (dispatch, getState) => {
+export const updatePost = (name, value) => (dispatch, getState) => {
+
   dispatch({
     type: 'EXAMPLE',
-    body: {
-      title: 'xxxx',
-      body: 'yyyy'
+    payload: {
+      name: name,
+      value: value
     }
   })
 }

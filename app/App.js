@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { render } from 'react-dom'
 import { HashRouter as Router, BrowserRouter as RouterTwo, Route, Switch, Redirect } from 'react-router-dom'
 import { createStore, applyMiddleware } from 'redux'
@@ -10,13 +10,13 @@ import Post from './componentes/Post'
 import Navegador from './componentes/Navegador'
 import Home from './componentes/Home'
 
-const middleware = thunk
-const store = createStore(
-  reducers,
-  applyMiddleware(middleware)
-)
+const store = createStore(reducers, applyMiddleware(thunk))
 
 function App() {
+
+  useEffect(() => {
+    M.AutoInit()
+  }, [])
 
   return(
   <Provider store={store}>

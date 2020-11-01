@@ -16,7 +16,7 @@ export default function useGetDatos(url, props) {
     }
     loadDatos()
     return () => {
-      console.log("Datos cargados")
+      console.log("Limpiando useGetDatos")
     }
   }, [datos.length])
 

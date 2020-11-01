@@ -22,9 +22,9 @@ export default function useGetDato(url, props = undefined) {
       loadDato()
     }
     return () => {
-      console.log("Dato cargado")
+      console.log("Limpiando useGetDato")
     }
-  }, [props])
+  }, [props.match])
 
   return [dato, setDato]
 }

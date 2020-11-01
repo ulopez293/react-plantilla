@@ -1,15 +1,16 @@
+import update from 'react-addons-update'
+
 const initialState = {
-  title: 'initialState',
-  body: 'initialState'
+  title: 'initialStateTitle',
+  body: 'initialStateBody'
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'EXAMPLE':
-      return {
-        title: action.body.title,
-        body: action.body.profile
-      }
+      return update(state, {
+        [action.payload.name]: {$set: action.payload.value}
+      })
     default:
       return state
   }
