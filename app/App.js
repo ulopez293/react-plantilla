@@ -9,6 +9,8 @@ import Posts from './componentes/Posts'
 import Post from './componentes/Post'
 import Navegador from './componentes/Navegador'
 import Home from './componentes/Home'
+import context from './componentes/Context/paddingContext'
+const PaddingContext = context.PaddingContext
 
 const store = createStore(reducers, applyMiddleware(thunk))
 
@@ -20,16 +22,18 @@ function App() {
 
   return(
   <Provider store={store}>
-    <Router>
-      <Navegador />
-      <Switch>
-        <Route exact path='/' component={Home} />
-        <Route exact path='/Home' component={Home} />
-        <Route exact path='/posts' component={Posts} />
-        <Route exact path='/posts/:id' component={Post} />
-        <Redirect exact from="/*" to="/" />
-      </Switch>
-    </Router>
+    <PaddingContext.Provider value={context.paddingCSS}>
+      <Router>
+        <Navegador />
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/Home' component={Home} />
+          <Route exact path='/posts' component={Posts} />
+          <Route exact path='/posts/:id' component={Post} />
+          <Redirect exact from="/*" to="/" />
+        </Switch>
+      </Router>
+    </PaddingContext.Provider>
   </Provider>
   )
 }
