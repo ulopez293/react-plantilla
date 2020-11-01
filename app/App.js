@@ -7,6 +7,7 @@ import thunk from 'redux-thunk'
 import reducers from './redux/reducers'
 import Posts from './componentes/Posts'
 import Post from './componentes/Post'
+import Tabla from './componentes/Tabla'
 import Navegador from './componentes/Navegador'
 import Home from './componentes/Home'
 import context from './componentes/Context/paddingContext'
@@ -28,7 +29,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/Home' component={Home} />
-          <Route exact path='/posts' component={Posts} />
+          <Route exact path='/posts' component={() => <Tabla rutaAPI={'/posts'} />} />
           <Route exact path='/posts/:id' component={Post} />
           <Redirect exact from="/*" to="/" />
         </Switch>

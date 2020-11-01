@@ -18,7 +18,7 @@ export default function useGetDatos(url, props) {
     return () => {
       console.log("Limpiando useGetDatos")
     }
-  }, [datos.length])
+  }, [])
 
   return [datos, setDatos]
 }
