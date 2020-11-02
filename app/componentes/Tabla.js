@@ -1,18 +1,22 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { render } from 'react-dom'
 import { Link } from 'react-router-dom'
 import update from 'react-addons-update'
 import useGetDatos from './Hooks/useGetDatos'
 import Parser from 'html-react-parser'
+import context from './Context/ThemeContext'
 
 function Tabla ({ rutaAPI }) {
   const [datos, setDatos] = useGetDatos(rutaAPI)
   const [titulos, setTitulos] = useState(undefined)
+  const themeContext = useContext(context.ThemeContext)
+  const edicion = <th>Acciones</th>
 
   useEffect(() => {
     if (datos.length) {
       let aux = []
       for (let key in datos[0]) {
+        if(key.toLowerCase().indexOf('id')>=0) continue
         aux.push(key);
       }
       setTitulos(aux)
@@ -20,7 +24,7 @@ function Tabla ({ rutaAPI }) {
   }, [datos])
 
   return (
-      <Fragment>
+      <div style={themeContext.padding}>
         <Choose>
           <When condition={titulos !== undefined}>
             <table>
@@ -31,7 +35,7 @@ function Tabla ({ rutaAPI }) {
                       <th key={index}>{titulo}</th>
                     )
                   }
-                  <th>Edición</th>
+                  {edicion}
                 </tr>
               </thead>
               <tbody>
@@ -39,12 +43,17 @@ function Tabla ({ rutaAPI }) {
                   <tr key={dato.id}>
                     {
                       Object.keys(dato).map(function(key) {
-                          return <td key={key}>{dato[key]}</td>
+                        if(key.toLowerCase().indexOf('id')>=0) return
+                        return <td key={key}>{dato[key]}</td>
                       })
                     }
                     <td>
-                      <Link to="/" style={{ margin: '5px' }} className="waves-effect waves-light btn-small">Editar</Link>
-                      <Link to="/" className="waves-effect waves-light btn-small">Eliminar</Link>
+                      <Link replace to={rutaAPI} style={{ margin: '5px' }}
+                            onClick={()=>alert(`Editar en api ${rutaAPI}/${dato.id}`)}
+                            className="waves-effect waves-light btn-small">Editar</Link>
+                      <Link replace to={rutaAPI} style={themeContext.buttons.delete}
+                            onClick={()=>alert(`Eliminar en api  ${rutaAPI}/${dato.id}`)}
+                            className="waves-effect waves-light btn-small">Eliminar</Link>
                     </td>
                   </tr>
                 </For>
@@ -55,7 +64,7 @@ function Tabla ({ rutaAPI }) {
             <h2>Cargando...</h2>
           </Otherwise>
         </Choose>
-      </Fragment>
+      </div>
   )
 }
 
