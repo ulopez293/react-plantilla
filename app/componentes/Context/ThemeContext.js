@@ -1,6 +1,6 @@
 import React from 'react'
 
-const theme = {
+const initialState = {
   padding: {
     paddingLeft: '5%',
     paddingRight: '5%'
@@ -11,10 +11,10 @@ const theme = {
     }
   }
 }
-const ThemeContext = React.createContext(theme);
+const ThemeContext = React.createContext(initialState);
 
 const context = {
-  theme: theme,
+  initialState: initialState,
   ThemeContext: ThemeContext
 }
 

@@ -2,13 +2,14 @@ import React, { useState, useContext, Fragment } from 'react'
 import { render } from 'react-dom'
 import { Link } from 'react-router-dom'
 import context from './Context/ThemeContext'
+
 const ThemeContext = context.ThemeContext
 
 function Navegador () {
   const themeContext = useContext(ThemeContext)
   return (
     <Fragment>
-      <nav className="nav-extended" style={themeContext.padding}>
+      <nav className="nav-extended" style={themeContext.theme.padding}>
         <div className="nav-wrapper">
           <Link replace to="/" className="brand-logo">Logo</Link>
           <a href="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>

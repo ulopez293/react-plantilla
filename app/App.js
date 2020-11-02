@@ -15,8 +15,7 @@ import Tabla from './componentes/Tabla'
 import Navegador from './componentes/Navegador'
 import Home from './componentes/Home'
 
-import context from './componentes/Context/ThemeContext'
-const ThemeContext = context.ThemeContext
+import ThemeProvider from './componentes/Context/ThemeProvider'
 
 const store = createStore(reducers, applyMiddleware(thunk))
 
@@ -28,7 +27,7 @@ function App() {
 
   return(
   <Provider store={store}>
-    <ThemeContext.Provider value={context.theme}>
+    <ThemeProvider>
       <Router>
         <Navegador />
         <Switch>
@@ -39,7 +38,7 @@ function App() {
           <Redirect exact from="/*" to="/" />
         </Switch>
       </Router>
-    </ThemeContext.Provider>
+    </ThemeProvider>
   </Provider>
   )
 }

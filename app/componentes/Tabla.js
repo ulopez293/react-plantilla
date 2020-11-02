@@ -24,7 +24,7 @@ function Tabla ({ rutaAPI }) {
   }, [datos])
 
   return (
-      <div style={themeContext.padding}>
+      <div style={themeContext.theme.padding}>
         <Choose>
           <When condition={titulos !== undefined}>
             <table>
@@ -51,7 +51,7 @@ function Tabla ({ rutaAPI }) {
                       <Link replace to={rutaAPI} style={{ margin: '5px' }}
                             onClick={()=>alert(`Editar en api ${rutaAPI}/${dato.id}`)}
                             className="waves-effect waves-light btn-small">Editar</Link>
-                      <Link replace to={rutaAPI} style={themeContext.buttons.delete}
+                      <Link replace to={rutaAPI} style={themeContext.theme.buttons.delete}
                             onClick={()=>alert(`Eliminar en api  ${rutaAPI}/${dato.id}`)}
                             className="waves-effect waves-light btn-small">Eliminar</Link>
                     </td>
