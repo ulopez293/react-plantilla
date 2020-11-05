@@ -8,11 +8,18 @@ const ThemeContext = context.ThemeContext
 const reducerTheme = (state = initialState, action) => {
   switch (action.type) {
     case 'UPDATE_BUTTON_DELETE':
-      return update(state, {
-        buttons: {
-          delete: { $set: action.payload }
-        }
-      })
+      return  {
+          ...state,
+          buttons: {
+            delete: { ...action.payload }
+          }
+      }
+      //FORMA 2 LIBRERIA
+      // return update(state, {
+      //   buttons: {
+      //     delete: { $set: action.payload }
+      //   }
+      // })
     default:
       return state
   }

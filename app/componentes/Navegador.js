@@ -1,4 +1,4 @@
-import React, { useState, useContext, Fragment } from 'react'
+import React, { useState, useEffect, useContext, Fragment } from 'react'
 import { render } from 'react-dom'
 import { Link } from 'react-router-dom'
 import context from './Context/ThemeContext'
@@ -7,6 +7,7 @@ const ThemeContext = context.ThemeContext
 
 function Navegador () {
   const themeContext = useContext(ThemeContext)
+
   return (
     <Fragment>
       <nav className="nav-extended" style={themeContext.theme.padding}>

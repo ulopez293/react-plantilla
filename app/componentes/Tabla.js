@@ -23,6 +23,16 @@ function Tabla ({ rutaAPI }) {
     }
   }, [datos])
 
+  const eliminar = (dato) => {
+    themeContext.themeAction({
+     type: "UPDATE_BUTTON_DELETE",
+     payload: {
+       background: "gray"
+     }
+    })
+    alert(`Eliminar en api  ${rutaAPI}/${dato.id}`)
+  }
+
   return (
       <div style={themeContext.theme.padding}>
         <Choose>
@@ -52,7 +62,7 @@ function Tabla ({ rutaAPI }) {
                             onClick={()=>alert(`Editar en api ${rutaAPI}/${dato.id}`)}
                             className="waves-effect waves-light btn-small">Editar</Link>
                       <Link replace to={rutaAPI} style={themeContext.theme.buttons.delete}
-                            onClick={()=>alert(`Eliminar en api  ${rutaAPI}/${dato.id}`)}
+                            onClick={()=>eliminar(dato)}
                             className="waves-effect waves-light btn-small">Eliminar</Link>
                     </td>
                   </tr>
